@@ -18,4 +18,11 @@ module.exports = () => {
     );
   };
   connect();
+  /* error 발생 시에 Error 생성 */
+  mongoose.connection.on('error', err => {
+    throw new Error(err);
+  });
+  mongoose.connection.on('disconnected', connect);
+  require('./User');
+  require('./Board');
 };
